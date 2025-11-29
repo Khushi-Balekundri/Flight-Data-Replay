@@ -1,7 +1,8 @@
+
 def write_replay_fdr(df, path):
-    """Write X-Plane .fdr file format."""
+    """ Custom .fdr file format """
+
     with open(path, "w") as f:
-        # Header
         f.write("\n".join([
             "A",
             "1000 Version",
@@ -11,8 +12,6 @@ def write_replay_fdr(df, path):
             "DATA"
         ]) + "\n")
         
-        # Data rows
-        # Rename columns before writing for cleaner access
         df_export = df.rename(columns={
             "Roll (deg)": "Roll",
             "Pitch (deg)": "Pitch", 

@@ -1,12 +1,12 @@
 import numpy as np
 from dataclasses import dataclass
-from typing import Iterator
 import pandas as pd
 
-R_EARTH = 6371000  # Earth radius in meters, ECEF
+R_EARTH = 6371000  # Earth radius in meters
 
 def latlon_to_xyz(lat, lon, alt_m):
-    """Convert lat/lon/alt to ECEF XYZ coordinates."""
+    """ Convert the lat, lon, alt values into ECEF XYZ coordinates    """
+
     lat = np.radians(lat)
     lon = np.radians(lon)
     r = R_EARTH + alt_m
@@ -19,7 +19,8 @@ def latlon_to_xyz(lat, lon, alt_m):
 
 
 def compute_xyz(df, alt_unit="m"):
-    """Add X, Y, Z coordinates to dataframe (returns new dataframe)."""
+    """ Write the X, Y, Z coordinates into a dataframe"""
+
     alt = df["Altitude"].values
     if alt_unit == "ft":
         alt = alt * 0.3048
@@ -34,15 +35,14 @@ def compute_xyz(df, alt_unit="m"):
 
 
 def generate_replay_frames(df):
-    """Convert flight data into FDRFrame objects (required by tests)."""
+    """ Convert the flight data into FDRFrame objects    """
+
     if df is None or df.empty:
         return []
 
     frames = []
-    for r in df[[
-        "Time", "Latitude", "Longitude", "Altitude",
-        "Roll (deg)", "Pitch (deg)", "Yaw (deg)"
-    ]].itertuples(index=False):
+    for r in df[["Time", "Latitude", "Longitude", "Altitude",
+        "Roll (deg)", "Pitch (deg)", "Yaw (deg)"]].itertuples(index=False):
 
         frames.append(FDRFrame(
             time=float(r[0]),
@@ -67,9 +67,10 @@ class FDRFrame:
     pitch: float
     yaw: float
 
-def generate_fdr_frames(df: pd.DataFrame) -> Iterator[FDRFrame]:
+def generate_fdr_frames(df):
     if df is None or df.empty:
         return iter(())
+    
     for r in df.itertuples(index=False):
         yield FDRFrame(
             time=float(r[0]), lat=float(r[2]), lon=float(r[1]),

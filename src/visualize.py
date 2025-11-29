@@ -1,10 +1,10 @@
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-import pandas as pd
 
 
 def plot_trajectory(df):
-    """Plot 3D flight path."""
+    """ Plotting the 3D Flight path """
+
     fig = plt.figure()
     ax = fig.add_subplot(111, projection="3d")
     
@@ -19,23 +19,25 @@ def plot_trajectory(df):
     plt.show()
 
 
+
 def plot_attitude(df):
-    """Plot roll, pitch, and yaw over time."""
+    """ Plot roll, pitch and yaw with respect to time   """
+
     fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=(10, 6), sharex=True)
     
-    # Extract arrays once
     time = df["Time"].values
     roll = df["Roll (deg)"].values
     pitch = df["Pitch (deg)"].values
     yaw = df["Yaw (deg)"].values
     
     ax1.plot(time, roll)
+    ax1.set_ylabel("Roll (deg)")
+
     ax2.plot(time, pitch)
+    ax2.set_ylabel("Pitch (deg)")
+
     ax3.plot(time, yaw)
-    
-    ax1.set_ylabel("Roll (°)")
-    ax2.set_ylabel("Pitch (°)")
-    ax3.set_ylabel("Yaw (°)")
+    ax3.set_ylabel("Yaw (deg)")
     ax3.set_xlabel("Time (s)")
     
     plt.tight_layout()
@@ -43,23 +45,19 @@ def plot_attitude(df):
 
 
 def plot_map(df):
-    """Plot 2D map with altitude color gradient."""
+    """ Plot a 2D flight map that is altitude coloured  """
+
     fig, ax = plt.subplots(figsize=(8, 6))
     
-    # Extract arrays once
     lon = df["Longitude"].values
     lat = df["Latitude"].values
     alt = df["Altitude"].values
     
-    # Scatter plot
-    sc = ax.scatter(lon, lat, c=alt, s=2, cmap="viridis", rasterized=True)
-    
-    # Add colorbar
+    sc = ax.scatter(lon, lat, c=alt, s=2, cmap="viridis", rasterized=True) 
     plt.colorbar(sc, ax=ax, label="Altitude (m)")
     
-    # Labels and formatting
-    ax.set_xlabel("Longitude (°)")
-    ax.set_ylabel("Latitude (°)")
+    ax.set_xlabel("Longitude (deg)")
+    ax.set_ylabel("Latitude (deg)")
     ax.set_title("2D Flight Path (Altitude-Colored)")
     ax.grid(True, alpha=0.3)
     ax.set_aspect("equal", adjustable="box")
@@ -69,7 +67,8 @@ def plot_map(df):
 
 
 def plot_altitude(df):
-    """Plot altitude over time."""
+    """ Plot altitude with respect to time   """
+
     plt.figure(figsize=(8, 4))
     
     plt.plot(df["Time"].values, df["Altitude"].values)
@@ -83,10 +82,10 @@ def plot_altitude(df):
 
 
 def animate_trajectory(df):
-    """Animate flight path replay (top-down view)."""
+    """ Animate flight path replay in top-down view """
+
     fig, ax = plt.subplots(figsize=(8, 6))
     
-    # Extract arrays once
     x_data = df["X"].values
     y_data = df["Y"].values
     
