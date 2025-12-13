@@ -83,7 +83,7 @@ python src/export_xplane.py --input data/clean/example.csv --output xplane_repla
 
 ## Sample Output
 
-*(demo GIF placeholder — will be added once visualization is implemented)*
+*(demo GIF placeholder — it will be added once visualization is implemented)*
 
 ---
 
@@ -106,3 +106,4 @@ PRs welcome! Beginner-friendly and modular.
 ## 📜 License
 
 MIT License.
+x
