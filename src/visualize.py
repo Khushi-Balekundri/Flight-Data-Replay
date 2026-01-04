@@ -1,3 +1,7 @@
+# NOTE:
+# Animation functionality is currently experimental and under development.
+# The replay pipeline and plot generation are stable.
+
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
