@@ -4,7 +4,7 @@ from pathlib import Path
 
 from src.loader import preprocess_flight_data
 from src.replay import compute_xyz
-from src.visualize import plot_map, plot_trajectory, plot_attitude
+from src.visualize import plot_map, plot_trajectory, plot_attitude, animate_trajectory
 from src.export_replay_fdr import write_replay_fdr
 
 def main():
@@ -56,6 +56,7 @@ def main():
         plot_map(df)
         plot_attitude(df)
         plot_trajectory(df)
+        animate_trajectory(df)
     else:
         print("[3/4] Skipping visualizations")
     
