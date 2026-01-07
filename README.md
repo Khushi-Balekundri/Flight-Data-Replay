@@ -87,7 +87,7 @@ python src/export_xplane.py --input data/clean/example.csv --output xplane_repla
 
 ---
 
-## How It Works (Short Version)
+## How It Works (Short Version) 
 
 1. Loads raw flight data into pandas
 2. Normalizes timestamps and resamples to a fixed frequency
