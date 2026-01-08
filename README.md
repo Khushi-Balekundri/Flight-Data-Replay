@@ -97,7 +97,7 @@ python src/export_xplane.py --input data/clean/example.csv --output xplane_repla
 
 ---
 
-## &#x20;Contributions
+## &#x20;Contributions 
 
 PRs welcome! Beginner-friendly and modular.
 
