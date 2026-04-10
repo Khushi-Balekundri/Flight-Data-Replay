@@ -1,8 +1,8 @@
 # Flight Data Replay Engine (Telemetry Replay System)
 
-A telemetry replay and analysis system for processing time-sequenced flight data and simulating system behavior in a controlled environment.
+This is a telemetry replay and analysis system for processing time-sequenced flight data and simulating system behavior in a controlled environment.
 
-Designed to emulate real-world telemetry pipelines, enabling monitoring, validation, and analysis of aircraft state over time.
+It is designed to emulate real-world telemetry pipelines, enabling monitoring, validation, and analysis of aircraft state over time.
 
 This project is designed as a demo for roles involving telemetry systems, mission operations, simulation pipelines, and real-time data processing.
 
