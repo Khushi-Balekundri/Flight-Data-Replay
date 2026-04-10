@@ -1,6 +1,17 @@
 import pandas as pd
 import numpy as np
 
+COLUMN_MAP = {
+    "time": "Time",
+    "baroaltitude": "Altitude",
+    "vertratecorr": "VerticalSpeed",
+    "PTCH": "Pitch",
+    "ROLL": "Roll",
+    "HDG": "Yaw",
+    "TAS": "Speed",
+    "LATP": "Latitude",
+    "LONP": "Longitude"
+}
 
 REQ_COLS = ['Time', 'Longitude', 'Latitude', 'Altitude',
             'Roll (deg)', 'Pitch (deg)', 'Yaw (deg)']
@@ -10,12 +21,26 @@ REQ_COLS = ['Time', 'Longitude', 'Latitude', 'Altitude',
 def load_csv(path):
     """The flight data is loaded with the required columns only"""
 
-    df = pd.read_csv(path, usecols=lambda col: col in REQ_COLS)
+    df = pd.read_csv(path, usecols=lambda col: col in COLUMN_MAP.keys() + [
+        "GMT_HOUR", "GMT_MINUTE", "GMT_SEC"
+    ])
+
+    # --- Step 2: CREATE TIME (ADD HERE) ---
+    df["Time"] = (
+        df["GMT_HOUR"] * 3600 +
+        df["GMT_MINUTE"] * 60 +
+        df["GMT_SEC"]
+    )
+            
+    df = df.rename(columns=COLUMN_MAP)
     
     missing = set(REQ_COLS) - set(df.columns)
     if missing:
         raise ValueError(f"Missing columns: {missing}")
-    
+
+    df = df.dropna(subset=REQ_COLS)
+    df = df.sort_values("Time").reset_index(drop=True)
+            
     return df[REQ_COLS]
 
 
