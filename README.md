@@ -37,7 +37,7 @@ flight-data-replay/
 │   ├── loader.py            # data loading + cleaning
 │   ├── replay.py            # core replay engine
 │   ├── visualize.py         # animation + plots
-│   └── export_xplane.py     # convert to sim-compatible format
+│   └── export_replay_fdr.py     # convert to sim-compatible format
 │
 ├── data/
 │   ├── raw/                 # raw input files
